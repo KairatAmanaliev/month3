@@ -2,6 +2,9 @@ import random
 import sqlite3
 
 
+async def sql_command_get_id_name():
+    return cursor.execute("SELECT id, name FROM mentor").fetchall()
+
 def sql_create():
     global db, cursor
     db = sqlite3.connect("bot.sqlite3")

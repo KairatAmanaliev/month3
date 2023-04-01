@@ -2,11 +2,12 @@ from aiogram.utils import executor
 import logging
 
 from config import dp, bot, ADMIN
-from handlers import client, callback, admin, extra, fsmAdminMentor
+from handlers import client, callback, admin, extra, fsmAdminMentor, shedule
 from database.bot_db import sql_create
 
 
 async def on_startup(_):
+    await shedule.set_scheduler()
     await bot.send_message(ADMIN[0], 'Я родился!')
     sql_create()
 
@@ -18,6 +19,7 @@ client.register_handlers_client(dp)
 callback.register_handlers_callback(dp)
 admin.register_handlers_admin(dp)
 fsmAdminMentor.register_handlers_fsm_context_proxy_storage(dp)
+
 
 extra.register_handlers_client(dp)
 
